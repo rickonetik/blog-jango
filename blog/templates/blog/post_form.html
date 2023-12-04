@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<h2>{% if id %} Edit {% else %} New {% endif %} Post</h2>
+<h2>{% if id %} Редактировать {% else %} Новый {% endif %} Пост</h2>
 <form method="post" novalidate>
   {% csrf_token %} 
   {{ form.as_p }}

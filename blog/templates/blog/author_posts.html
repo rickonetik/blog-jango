@@ -1,0 +1,12 @@
+<!-- author_posts.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Посты, написанные пользователем {{ author.username }}</h1>
+  {% for post in author_posts %}
+    <!-- Display post details -->
+    <h2><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+    <small>Опубликовано {{ post.published_at | date:"d.m.Y" }} от {{ post.author | title }}</small>
+    <!-- Add edit and delete options if necessary -->
+  {% endfor %}
+{% endblock content %}

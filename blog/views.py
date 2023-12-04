@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import  login_required
 from .models import Post
 from .forms import PostForm, CommentForm
+from django.contrib.auth.models import User
+
 
 @login_required
 def delete_post(request, id):
@@ -72,6 +74,10 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
+def author_posts(request, author_id):
+    author = User.objects.get(pk=author_id)
+    author_posts = author.post_set.all()  # Replace with your logic to fetch the author's posts
+    return render(request, 'blog/author_posts.html', {'author': author, 'author_posts': author_posts})
 
 def home(request):
     posts = Post.objects.all()

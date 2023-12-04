@@ -3,14 +3,18 @@
 {% block content %}
   <h1>Посты</h1>
   {% for post in posts %}
-    <h2><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-    <small>Опубликовано {{ post.published_at | date:"d.m.Y" }} by {{ post.author | title }}</small>
-    
-    {% if request.user.is_authenticated and request.user == post.author %}
-      <p>
-        <a href="{% url 'post-edit' post.id %}">Редактировать</a> 
-        <a href="{% url 'post-delete' post.id %}">Удалить</a>
-      </p>
+  <h2><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+  <small>
+    Опубликовано
+    {% if post.author.id %}
+      <a href="{% url 'author-posts' post.author.id %}">
+        {{ post.published_at | date:"d.m.Y" }} от {{ post.author | title }}
+      </a>
+    {% else %}
+      Неизвестный автор
     {% endif %}
-  {% endfor %}
+  </small>
+
+{% endfor %}
+
 {% endblock content %}
