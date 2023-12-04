@@ -5,4 +5,17 @@
   <h2>{{ post.title }}</h2>
   <small>Опубликовано {{ post.published_at | date:"d.m.Y" }} by {{ post.author | title }}</small>
   <p>{{ post.content }}</p>
+
+  <h3>Комментарии:</h3>
+  {% for comment in post.comments.all %}
+    <p>
+      <strong>{{ comment.author.username }}</strong> написал(а) {{ comment.created_at | date:"d.m.Y H:i" }}:<br>
+      {{ comment.content }}
+    </p>
+  {% empty %}
+    <p>Нет комментариев.</p>
+  {% endfor %}
+
+  <!-- Кнопка для написания комментария -->
+  <a href="{% url 'add_comment_to_post' post.pk %}">Написать комментарий</a>
 {% endblock content %}

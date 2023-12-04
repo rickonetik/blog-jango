@@ -1,0 +1,7 @@
+<!-- add_comment_to_post.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить комментарий</button>
+  </form>
+  
